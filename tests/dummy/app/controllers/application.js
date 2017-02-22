@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import aframe from 'aframe';
+import AFrame from 'aframe';
 
 export default Ember.Controller.extend({
-  aframe
+  aframe: AFrame
 });
