@@ -1,19 +1,16 @@
 /* jshint node: true */
 'use strict';
 
-const Funnel = require('broccoli-funnel')
-const mergeTrees = require('broccoli-merge-trees');
+const Funnel = require('broccoli-funnel');
 
 module.exports = {
   name: 'ember-aframe-shim',
 
-  treeForVendor(vendorTree) {
-    let aframeTree = new Funnel('node_modules/aframe/dist', {
+  treeForVendor() {
+    return new Funnel('node_modules/aframe/dist', {
       files: ['aframe-master.js'],
       destDir: 'aframe'
     });
-
-    return mergeTrees([vendorTree, aframeTree]);
   },
 
   included() {
