@@ -1,12 +1,12 @@
 'use strict';
 
 const fs = require('fs');
-var blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
-var setupTestHooks = blueprintHelpers.setupTestHooks;
-var emberNew = blueprintHelpers.emberNew;
-var emberGenerate = blueprintHelpers.emberGenerate;
+const blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
+const setupTestHooks = blueprintHelpers.setupTestHooks;
+const emberNew = blueprintHelpers.emberNew;
+const emberGenerate = blueprintHelpers.emberGenerate;
 
-var expect = require('ember-cli-blueprint-test-helpers/chai').expect;
+const expect = require('ember-cli-blueprint-test-helpers/chai').expect;
 
 function getDevDependencies() {
   let packageJSON = JSON.parse(fs.readFileSync('package.json', 'utf8'));
@@ -15,7 +15,7 @@ function getDevDependencies() {
 
 describe('Acceptance: ember generate and destroy ember-aframe-shim', function() {
   setupTestHooks(this, {
-    disableMocking: true,
+    disabledTasks: [],
     timeout: 300000
   });
 
