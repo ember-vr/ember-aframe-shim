@@ -49,5 +49,10 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "ember-try"
+    ]
   }
 }
