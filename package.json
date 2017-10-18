@@ -1,6 +1,6 @@
 {
   "name": "ember-aframe-shim",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Ember.js shim for A-Frame",
   "keywords": [
     "a-frame",
