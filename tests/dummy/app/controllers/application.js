@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 import AFrame from 'aframe';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   aframe: AFrame
 });
