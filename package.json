@@ -24,7 +24,7 @@
     "pkg-conf": "^2.0.0"
   },
   "devDependencies": {
-    "aframe": "^0.7.0",
+    "aframe": "^0.8.2",
     "ember-cli": "~2.17.0",
     "ember-cli-babel": "^6.3.0",
     "ember-cli-blueprint-test-helpers": "^0.18.0",
