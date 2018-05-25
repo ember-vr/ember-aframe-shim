@@ -1,12 +1,13 @@
-import { test } from 'qunit';
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { find, visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
 
-moduleForAcceptance('Acceptance | application');
+module('Acceptance | application', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('visiting /', function(assert) {
-  visit('/');
+  test('visiting /', async function(assert) {
+    await visit('/');
 
-  andThen(function() {
-    assert.equal(find('#aframe-scenes-length').text().trim(), '0');
+    assert.equal(find('#aframe-scenes-length').textContent.trim(), '0');
   });
 });
