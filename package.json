@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "aframe": "^0.8.2",
-    "ember-cli": "~3.3.0",
+    "ember-cli": "~3.4.0",
     "ember-cli-babel": "^6.3.0",
     "ember-cli-blueprint-test-helpers": "^0.18.0",
     "ember-cli-dependency-checker": "^3.0.0",
