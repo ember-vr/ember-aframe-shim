@@ -7,7 +7,7 @@ const mergeTrees = require('broccoli-merge-trees');
 const packageName = 'aframe';
 
 module.exports = {
-  name: 'ember-aframe-shim',
+  name: require('./package').name,
 
   included() {
     this._super.included.apply(this, arguments);
