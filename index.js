@@ -16,7 +16,11 @@ module.exports = {
     let nodeModulesPath = absolutePath.substr(root.length + 1);
 
     this.import(nodeModulesPath, {
-      using: [{ transformation: 'amd', as: packageName }]
+      // we need aframe to run immediately
+      // (because components are run immediately and depend on aframe)
+      // and be importable
+      // using: [{ transformation: 'amd', as: packageName }]
     });
+    this.import(`vendor/shims/${packageName}.js`);
   }
 };

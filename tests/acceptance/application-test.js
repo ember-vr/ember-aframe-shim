@@ -6,9 +6,10 @@ module('Acceptance | application', function(hooks) {
   setupApplicationTest(hooks);
 
   test('visiting /', async function(assert) {
+    assert.equal(window.AFRAME.scenes.length, 0);
+
     await visit('/');
 
-    assert.dom('#aframe-import-scenes-length').hasText('0');
-    assert.dom('#aframe-global-scenes-length').hasText('0');
+    assert.dom('#aframe-scenes-length').hasText('0');
   });
 });
