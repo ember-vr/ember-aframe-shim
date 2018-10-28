@@ -1,9 +1,5 @@
 'use strict';
 
-const path = require('path');
-const Funnel = require('broccoli-funnel');
-const mergeTrees = require('broccoli-merge-trees');
-
 const packageName = 'aframe';
 
 module.exports = {
@@ -12,24 +8,15 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    let resolvedPath = require.resolve(packageName);
-    this.dirname = path.dirname(resolvedPath);
-    this.basename = path.basename(resolvedPath);
+    const resolve = require('resolve');
 
-    // we need aframe to run immediately
-    // (because components are run immediately and depend on aframe)
-    // and be importable
-    this.import(`vendor/${packageName}/${this.basename}`);
-    this.import(`vendor/shims/${packageName}.js`);
-  },
+    let { root } = this.project;
 
-  treeForVendor(tree) {
-    return mergeTrees([
-      tree,
-      new Funnel(this.dirname, {
-        files: [this.basename],
-        destDir: packageName
-      })
-    ]);
+    let absolutePath = resolve.sync(packageName, { basedir: root });
+    let nodeModulesPath = absolutePath.substr(root.length + 1);
+
+    this.import(nodeModulesPath, {
+      using: [{ transformation: 'amd', as: packageName }]
+    });
   }
 };
