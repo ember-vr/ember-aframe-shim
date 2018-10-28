@@ -76,6 +76,30 @@ module.exports = function() {
               '@ember/jquery': '^0.5.1'
             }
           }
+        },
+        {
+          name: 'aframe-0.5',
+          npm: {
+            devDependencies: {
+              'aframe': '0.5'
+            }
+          }
+        },
+        {
+          name: 'aframe-0.6',
+          npm: {
+            devDependencies: {
+              'aframe': '0.6'
+            }
+          }
+        },
+        {
+          name: 'aframe-0.7',
+          npm: {
+            devDependencies: {
+              'aframe': '0.7'
+            }
+          }
         }
       ]
     };
