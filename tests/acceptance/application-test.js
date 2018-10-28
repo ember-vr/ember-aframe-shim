@@ -1,15 +1,12 @@
 import { module, test } from 'qunit';
-import { visit } from '@ember/test-helpers';
-import { setupApplicationTest } from 'ember-qunit';
+import AFrame from 'aframe';
 
-module('Acceptance | application', function(hooks) {
-  setupApplicationTest(hooks);
+module('Acceptance | application', function() {
+  test('import works', function(assert) {
+    assert.equal(AFrame.scenes.length, 0);
+  });
 
-  test('visiting /', async function(assert) {
+  test('global is available', function(assert) {
     assert.equal(window.AFRAME.scenes.length, 0);
-
-    await visit('/');
-
-    assert.dom('#aframe-scenes-length').hasText('0');
   });
 });
