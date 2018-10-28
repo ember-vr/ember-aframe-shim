@@ -10,10 +10,9 @@ module.exports = {
   ],
   browser_args: {
     Firefox: {
-      mode: 'ci',
-      args: [
-        '-headless'
-      ]
+      ci: [
+        process.env.CI ? '-headless' : null
+      ].filter(Boolean)
     }
   }
 };
