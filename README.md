@@ -21,8 +21,10 @@ Usage
 
 ```js
 import AFRAME from 'aframe';
+import THREE from 'three';
 
 console.log(AFRAME.version);
+console.log(THREE.REVISION);
 ```
 
 
