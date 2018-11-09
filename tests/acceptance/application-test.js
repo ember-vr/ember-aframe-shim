@@ -1,12 +1,12 @@
 import { module, test } from 'qunit';
-import AFrame from 'aframe';
+import AFRAME from 'aframe';
 
 module('Acceptance | application', function() {
   test('import works', function(assert) {
-    assert.equal(AFrame.scenes.length, 0);
+    assert.ok(AFRAME.version);
   });
 
   test('global is available', function(assert) {
-    assert.equal(window.AFRAME.scenes.length, 0);
+    assert.ok(window.AFRAME.version);
   });
 });
