@@ -22,5 +22,6 @@ module.exports = {
       // using: [{ transformation: 'amd', as: packageName }]
     });
     this.import(`vendor/shims/${packageName}.js`);
+    this.import(`vendor/shims/three.js`);
   }
 };
