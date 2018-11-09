@@ -20,9 +20,9 @@ Usage
 ------------------------------------------------------------------------------
 
 ```js
-import AFrame from 'aframe';
+import AFRAME from 'aframe';
 
-console.log(AFrame.scenes.length);
+console.log(AFRAME.version);
 ```
 
 
