@@ -29,7 +29,7 @@
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",
     "aframe": "^0.8.2",
-    "ember-cli": "~3.5.0",
+    "ember-cli": "~3.6.0",
     "ember-cli-babel": "^7.1.0",
     "ember-cli-blueprint-test-helpers": "^0.19.1",
     "ember-cli-dependency-checker": "^3.0.0",
