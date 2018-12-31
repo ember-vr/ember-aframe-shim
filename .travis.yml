@@ -22,9 +22,9 @@ env:
 branches:
   only:
     - master
-    - /^greenkeeper\/.*$/
     # npm version tags
     - /^v\d+\.\d+\.\d+/
+    - /^greenkeeper\/.*$/
 
 jobs:
   fail_fast: true
