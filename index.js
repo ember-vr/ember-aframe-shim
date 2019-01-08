@@ -8,14 +8,7 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    const resolve = require('resolve');
-
-    let { root } = this.project;
-
-    let absolutePath = resolve.sync(packageName, { basedir: root });
-    let nodeModulesPath = absolutePath.substr(root.length + 1);
-
-    this.import(nodeModulesPath, {
+    this.import('node_modules/aframe/dist/aframe-master.js', {
       // we need aframe to run immediately
       // (because components are run immediately and depend on aframe)
       // and be importable
