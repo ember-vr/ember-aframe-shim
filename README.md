@@ -8,6 +8,14 @@ ember-aframe-shim
 
 An [Ember.js](https://www.emberjs.com) shim for [A-Frame](https://aframe.io)
 
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+
+
 Installation
 ------------------------------------------------------------------------------
 
