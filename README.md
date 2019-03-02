@@ -36,6 +36,12 @@ console.log(THREE.REVISION);
 ```
 
 
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
 License
 ------------------------------------------------------------------------------
 
