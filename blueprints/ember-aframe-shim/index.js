@@ -3,9 +3,9 @@
 module.exports = {
   normalizeEntityName() {},
 
-  afterInstall() {
-    return require('pkg-conf')('devDependencies').then(devDependencies => {
-      return this.addPackageToProject('aframe', devDependencies['aframe']);
-    });
+  async afterInstall() {
+    let devDependencies = await require('pkg-conf')('devDependencies');
+
+    return await this.addPackageToProject('aframe', devDependencies['aframe']);
   }
 };
