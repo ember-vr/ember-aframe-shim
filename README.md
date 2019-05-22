@@ -1,7 +1,6 @@
 ember-aframe-shim
 ==============================================================================
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/ember-vr/ember-aframe-shim.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/ember-aframe-shim.svg)](https://badge.fury.io/js/ember-aframe-shim)
 [![Build Status](https://travis-ci.org/ember-vr/ember-aframe-shim.svg?branch=master)](https://travis-ci.org/ember-vr/ember-aframe-shim)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a6ab4422-1299-4343-8aba-2d53d89b48f8/deploy-status)](https://app.netlify.com/sites/ember-aframe-shim/deploys)
