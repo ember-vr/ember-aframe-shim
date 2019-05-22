@@ -1,6 +1,8 @@
 'use strict';
 
 const fs = require('fs');
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 const {
   setupTestHooks,
   emberNew,
@@ -8,8 +10,8 @@ const {
 } = require('ember-cli-blueprint-test-helpers/helpers');
 const { expect } = require('ember-cli-blueprint-test-helpers/chai');
 
-function getDevDependencies() {
-  let packageJSON = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+async function getDevDependencies() {
+  let packageJSON = JSON.parse(await readFile('package.json', 'utf8'));
   return Object.keys(packageJSON.devDependencies);
 }
 
@@ -19,12 +21,13 @@ describe('Acceptance: ember generate and destroy ember-aframe-shim', function() 
     timeout: 300000
   });
 
-  it('ember-aframe-shim', function() {
-    return emberNew().then(() => {
-      expect(getDevDependencies()).to.not.contain('aframe');
-      return emberGenerate(['ember-aframe-shim']);
-    }).then(() => {
-      expect(getDevDependencies()).to.contain('aframe');
-    });
+  it('ember-aframe-shim', async function() {
+    await emberNew();
+
+    expect(await getDevDependencies()).to.not.contain('aframe');
+
+    await emberGenerate(['ember-aframe-shim']);
+
+    expect(await getDevDependencies()).to.contain('aframe');
   });
 });
