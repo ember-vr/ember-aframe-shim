@@ -100,6 +100,14 @@ module.exports = function() {
               'aframe': '0.7'
             }
           }
+        },
+        {
+          name: 'aframe-0.8',
+          npm: {
+            devDependencies: {
+              'aframe': '0.8'
+            }
+          }
         }
       ]
     };
