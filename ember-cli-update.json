@@ -1,8 +1,0 @@
-{
-  "blueprints": [
-    {
-      "name": "ember-cli",
-      "version": "3.12.0"
-    }
-  ]
-}
