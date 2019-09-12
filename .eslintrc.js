@@ -27,6 +27,7 @@ module.exports = {
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
+        'faltest/**/*.js',
         'node-tests/**/*.js',
         'tests/dummy/config/**/*.js'
       ],
@@ -50,7 +51,10 @@ module.exports = {
     },
 
     {
-      files: ['node-tests/**/*-test.js'],
+      files: [
+        'faltest/**/*-test.js',
+        'node-tests/**/*-test.js'
+      ],
       env: {
         mocha: true
       }
