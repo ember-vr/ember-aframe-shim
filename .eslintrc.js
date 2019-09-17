@@ -50,7 +50,7 @@ module.exports = {
     },
 
     {
-      files: ['node-tests/**/*.js'],
+      files: ['node-tests/**/*-test.js'],
       env: {
         mocha: true
       }
