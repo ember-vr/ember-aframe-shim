@@ -7,12 +7,5 @@ module.exports = {
   launch_in_dev: [
     'Firefox',
     'Chrome'
-  ],
-  browser_args: {
-    Firefox: {
-      ci: [
-        process.env.CI ? '-headless' : null
-      ].filter(Boolean)
-    }
-  }
+  ]
 };
