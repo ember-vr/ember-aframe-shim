@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import AFRAME from 'aframe';
 import THREE from 'three';
 
-module('Acceptance | application', function() {
+module('Acceptance | shim', function() {
   module('aframe', function() {
     test('import works', function(assert) {
       assert.ok(AFRAME.version);
