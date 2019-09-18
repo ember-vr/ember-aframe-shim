@@ -3,6 +3,7 @@
 const { setUpWebDriver } = require('@faltest/lifecycle');
 const Server = require('ember-cli-test-server');
 const assert = require('assert');
+const { percySnapshot } = require('@percy/webdriverio');
 
 describe('smoke', function() {
   setUpWebDriver.call(this);
@@ -44,5 +45,28 @@ describe('smoke', function() {
     });
 
     assert.strictEqual(src, 'sechelt');
+
+    await this.browser.execute(() => {
+      function canvasToImage(canvas) {
+        let scene = canvas.parentElement;
+        let canvasData = scene.components.screenshot.getCanvas('perspective').toDataURL();
+
+        // eslint-disable-next-line no-undef
+        let image = document.createElement('img');
+        image.src = canvasData;
+        image.classList.add('a-canvas');
+
+        scene.setAttribute('data-percy-modified', true);
+        scene.style = 'display: none';
+        scene.parentElement.appendChild(image);
+      }
+
+      // eslint-disable-next-line no-undef
+      for (let canvas of document.querySelectorAll('canvas')) {
+        canvasToImage(canvas);
+      }
+    });
+
+    await percySnapshot(this.browser._browser, this.test.fullTitle());
   });
 });

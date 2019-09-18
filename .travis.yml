@@ -60,7 +60,7 @@ jobs:
     - name: "FalTest"
       services: xvfb
       env: WEBDRIVER_BROWSER=firefox
-      script: npm run faltest
+      script: percy exec -- npm run faltest
 
 script:
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
