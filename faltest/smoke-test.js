@@ -23,25 +23,22 @@ describe('smoke', function() {
   });
 
   it('works', async function() {
-    await this.browser.execute(() => {
-      // eslint-disable-next-line no-undef
-      document.getElementById('sechelt-entity').click();
-    });
-
     let src = await this.browser.executeAsync(done => {
       // eslint-disable-next-line no-undef
-      let material = document.getElementById('image-360').getAttribute('material');
+      let image360 = document.getElementById('image-360');
 
-      (function loop() {
-        setTimeout(() => {
-          let src = material.src.id;
-          if (src !== 'city') {
-            done(src);
-          } else {
-            loop();
-          }
-        });
-     })();
+      function fadeComplete() {
+        image360.removeEventListener('animationcomplete__fadeback', fadeComplete);
+
+        let src = image360.getAttribute('material').src.id;
+
+        done(src);
+      }
+
+      image360.addEventListener('animationcomplete__fadeback', fadeComplete);
+
+      // eslint-disable-next-line no-undef
+      document.getElementById('sechelt-entity').click();
     });
 
     assert.strictEqual(src, 'sechelt');
