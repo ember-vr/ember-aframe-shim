@@ -5,6 +5,21 @@ const Server = require('ember-cli-test-server');
 const assert = require('assert');
 const { percySnapshot } = require('@percy/webdriverio');
 
+// These elements only take JS actions,
+// not real WebDriver actions
+class AFrameBrowser {
+  constructor(browser) {
+    this._browser = browser;
+  }
+
+  async click(selector) {
+    await this._browser.execute(selector => {
+      // eslint-disable-next-line no-undef
+      document.querySelector(selector).click();
+    }, selector);
+  }
+}
+
 describe('smoke', function() {
   setUpWebDriver.call(this);
 
@@ -16,6 +31,8 @@ describe('smoke', function() {
 
   beforeEach(async function() {
     await this.browser.url(`http://localhost:${this.port}`);
+
+    this.aframeBrowser = new AFrameBrowser(this.browser);
   });
 
   after(async function() {
@@ -23,10 +40,7 @@ describe('smoke', function() {
   });
 
   it('works', async function() {
-    await this.browser.execute(() => {
-      // eslint-disable-next-line no-undef
-      document.getElementById('sechelt-entity').click();
-    });
+    await this.aframeBrowser.click('#sechelt-entity');
 
     let src = await this.browser.executeAsync(done => {
       // eslint-disable-next-line no-undef
