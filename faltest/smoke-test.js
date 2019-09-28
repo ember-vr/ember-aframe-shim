@@ -1,25 +1,60 @@
 'use strict';
 
 const { setUpWebDriver } = require('@faltest/lifecycle');
-const Server = require('ember-cli-test-server');
+const { promisify } = require('util');
+const request = promisify(require('request'));
+const execa = require('execa');
 const assert = require('assert');
 const { percySnapshot } = require('@percy/webdriverio');
+const { URL } = require('url');
+const { repository } = require('../package');
 
 describe('smoke', function() {
   setUpWebDriver.call(this);
 
   before(async function() {
-    this.server = new Server();
+    this.url = await new Promise(resolve => {
+      (async function getUrl() {
+        let commit;
+        if (process.env.TRAVIS_PULL_REQUEST_SHA) {
+          commit = process.env.TRAVIS_PULL_REQUEST_SHA;
+        } else {
+          commit = (await execa.command('git rev-parse HEAD')).stdout;
+        }
 
-    this.port = await this.server.start();
+        let { pathname } = new URL(repository);
+
+        let [, org, name] = pathname.match(/^\/(.+)\/(.+)\.git$/);
+
+        let repo = `${org}/${name}`;
+
+        let { body } = await request({
+          url: `https://api.github.com/repos/${repo}/statuses/${commit}`,
+          headers: {
+            'User-Agent': repo
+          },
+          json: true
+        });
+
+        let status = body.find(status => status.context === `netlify/${name}/deploy-preview`);
+
+        let fallback = `https://${name}.netlify.com`;
+
+        if (!status) {
+          resolve(fallback);
+        }
+
+        if (status.state !== 'pending') {
+          resolve(status.target_url);
+        } else {
+          setTimeout(getUrl, 1000);
+        }
+      })();
+    });
   });
 
   beforeEach(async function() {
-    await this.browser.url(`http://localhost:${this.port}`);
-  });
-
-  after(async function() {
-    await this.server.stop();
+    await this.browser.url(this.url);
   });
 
   it('works', async function() {
