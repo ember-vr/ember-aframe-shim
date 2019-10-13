@@ -23,6 +23,10 @@ describe('smoke', function() {
           } else {
             commit = process.env.TRAVIS_COMMIT;
           }
+          // eslint-disable-next-line no-console
+          console.log('TRAVIS_PULL_REQUEST_SHA', process.env.TRAVIS_PULL_REQUEST_SHA);
+          // eslint-disable-next-line no-console
+          console.log('TRAVIS_COMMIT', process.env.TRAVIS_COMMIT);
 
           let { pathname } = new URL(repository);
 
