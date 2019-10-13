@@ -16,7 +16,7 @@ describe('smoke', function() {
 
   before(async function() {
     if (ci.isCI) {
-      this.url = await new Promise(resolve => {
+      this.url = await new Promise((resolve, reject) => {
         (async function getUrl() {
           let commit;
           if (ci.isPR) {
@@ -44,7 +44,11 @@ describe('smoke', function() {
           let fallback = `https://${name}.netlify.com`;
 
           if (!status) {
-            resolve(fallback);
+            if (ci.isPR) {
+              reject(new Error('This is a pull request, but a Netlify status was not found.'));
+            } else {
+              resolve(fallback);
+            }
           } else if (status.state !== 'pending') {
             resolve(status.target_url);
           } else {
