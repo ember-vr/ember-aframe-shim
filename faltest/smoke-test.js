@@ -8,51 +8,67 @@ const assert = require('assert');
 const { percySnapshot } = require('@percy/webdriverio');
 const { URL } = require('url');
 const { repository } = require('../package');
+const Server = require('ember-cli-test-server');
+const ci = require('ci-info')
 
 describe('smoke', function() {
   setUpWebDriver.call(this);
 
   before(async function() {
-    this.url = await new Promise(resolve => {
-      (async function getUrl() {
-        let commit;
-        if (process.env.TRAVIS_PULL_REQUEST_SHA) {
-          commit = process.env.TRAVIS_PULL_REQUEST_SHA;
-        } else {
-          commit = (await execa.command('git rev-parse HEAD')).stdout;
-        }
+    if (ci.isCI) {
+      this.url = await new Promise(resolve => {
+        (async function getUrl() {
+          let commit;
+          if (ci.isPR) {
+            commit = process.env.TRAVIS_PULL_REQUEST_SHA;
+          } else {
+            commit = (await execa.command('git rev-parse HEAD')).stdout;
+          }
 
-        let { pathname } = new URL(repository);
+          let { pathname } = new URL(repository);
 
-        let [, org, name] = pathname.match(/^\/(.+)\/(.+)\.git$/);
+          let [, org, name] = pathname.match(/^\/(.+)\/(.+)\.git$/);
 
-        let repo = `${org}/${name}`;
+          let repo = `${org}/${name}`;
 
-        let { body } = await request({
-          url: `https://api.github.com/repos/${repo}/statuses/${commit}`,
-          headers: {
-            'User-Agent': repo
-          },
-          json: true
-        });
+          let { body } = await request({
+            url: `https://api.github.com/repos/${repo}/statuses/${commit}`,
+            headers: {
+              'User-Agent': repo
+            },
+            json: true
+          });
 
-        let status = body.find(status => status.context === `netlify/${name}/deploy-preview`);
+          let status = body.find(status => status.context === `netlify/${name}/deploy-preview`);
 
-        let fallback = `https://${name}.netlify.com`;
+          let fallback = `https://${name}.netlify.com`;
 
-        if (!status) {
-          resolve(fallback);
-        } else if (status.state !== 'pending') {
-          resolve(status.target_url);
-        } else {
-          setTimeout(getUrl, 1000);
-        }
-      })();
-    });
+          if (!status) {
+            resolve(fallback);
+          } else if (status.state !== 'pending') {
+            resolve(status.target_url);
+          } else {
+            setTimeout(getUrl, 1000);
+          }
+        })();
+      });
+    } else {
+      this.server = new Server();
+
+      let port = await this.server.start();
+
+      this.url = `http://localhost:${port}`;
+    }
   });
 
   beforeEach(async function() {
     await this.browser.url(this.url);
+  });
+
+  after(async function() {
+    if (this.server) {
+      await this.server.stop();
+    }
   });
 
   it('works', async function() {
