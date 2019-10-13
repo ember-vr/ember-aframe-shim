@@ -6,27 +6,43 @@ const request = promisify(require('request'));
 const assert = require('assert');
 const { percySnapshot } = require('@percy/webdriverio');
 const { URL } = require('url');
-const { repository } = require('../package');
+const { name } = require('../package');
 const Server = require('ember-cli-test-server');
 const ci = require('ci-info');
+const pkgUp = require('pkg-up');
 
-describe('smoke', function() {
-  setUpWebDriver.call(this);
-
-  before(async function() {
-    if (ci.isCI) {
-      this.url = await new Promise((resolve, reject) => {
-        (async function getUrl() {
-          let commit;
+async function getStatus({
+  commit,
+  repository,
+  context,
+  interval = 1000
+}) {
+  return await new Promise(resolve => {
+    (async function getStatus() {
+      if (!commit) {
+        // https://github.com/watson/ci-info/pull/42
+        if (ci.TRAVIS) {
           if (ci.isPR) {
             commit = process.env.TRAVIS_PULL_REQUEST_SHA;
           } else {
             commit = process.env.TRAVIS_COMMIT;
           }
+        } else if (process.env.GITHUB_ACTIONS) {
+          commit = process.env.GITHUB_SHA;
+        }
+      }
 
-          let { pathname } = new URL(repository);
+      if (!repository) {
+        repository = require(await pkgUp()).repository;
+      }
 
-          let [, org, name] = pathname.match(/^\/(.+)\/(.+)\.git$/);
+      let url = new URL(repository);
+
+      let status;
+
+      switch (url.host) {
+        case 'github.com': {
+          let [, org, name] = url.pathname.match(/^\/(.+)\/(.+)\.git$/);
 
           let repo = `${org}/${name}`;
 
@@ -38,23 +54,35 @@ describe('smoke', function() {
             json: true
           });
 
-          let status = body.find(status => status.context === `netlify/${name}/deploy-preview`);
+          status = body.find(status => status.context === context);
 
-          let fallback = `https://${name}.netlify.com`;
-
-          if (!status) {
-            if (ci.isPR) {
-              reject(new Error('This is a pull request, but a Netlify status was not found.'));
-            } else {
-              resolve(fallback);
-            }
-          } else if (status.state !== 'pending') {
-            resolve(status.target_url);
-          } else {
-            setTimeout(getUrl, 1000);
+          if (status && status.state !== 'pending') {
+            return resolve(status);
           }
-        })();
+
+          break;
+        }
+      }
+
+      if (!status && !ci.isPR) {
+        return resolve(null);
+      }
+
+      setTimeout(getStatus, interval);
+    })();
+  });
+}
+
+describe('smoke', function() {
+  setUpWebDriver.call(this);
+
+  before(async function() {
+    if (ci.isCI) {
+      let status = await getStatus({
+        context: `netlify/${name}/deploy-preview`
       });
+
+      this.url = status ? status.target_url : `https://${name}.netlify.com`;
     } else {
       this.server = new Server();
 
