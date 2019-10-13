@@ -3,7 +3,6 @@
 const { setUpWebDriver } = require('@faltest/lifecycle');
 const { promisify } = require('util');
 const request = promisify(require('request'));
-const execa = require('execa');
 const assert = require('assert');
 const { percySnapshot } = require('@percy/webdriverio');
 const { URL } = require('url');
@@ -22,7 +21,7 @@ describe('smoke', function() {
           if (ci.isPR) {
             commit = process.env.TRAVIS_PULL_REQUEST_SHA;
           } else {
-            commit = (await execa.command('git rev-parse HEAD')).stdout;
+            commit = process.env.TRAVIS_COMMIT;
           }
 
           let { pathname } = new URL(repository);
