@@ -42,9 +42,7 @@ describe('smoke', function() {
 
         if (!status) {
           resolve(fallback);
-        }
-
-        if (status.state !== 'pending') {
+        } else if (status.state !== 'pending') {
           resolve(status.target_url);
         } else {
           setTimeout(getUrl, 1000);
