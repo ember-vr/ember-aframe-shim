@@ -9,7 +9,7 @@ const { percySnapshot } = require('@percy/webdriverio');
 const { URL } = require('url');
 const { repository } = require('../package');
 const Server = require('ember-cli-test-server');
-const ci = require('ci-info')
+const ci = require('ci-info');
 
 describe('smoke', function() {
   setUpWebDriver.call(this);
