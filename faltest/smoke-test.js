@@ -13,6 +13,7 @@ describe('smoke', function() {
 
   before(async function() {
     if (ci.isCI) {
+
       let status = await getStatus({
         context: `netlify/${name}/deploy-preview`
       });
@@ -79,6 +80,6 @@ describe('smoke', function() {
       }
     });
 
-    await percySnapshot(this.browser._browser, this.test.fullTitle());
+    // await percySnapshot(this.browser._browser, this.test.fullTitle());
   });
 });

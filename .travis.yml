@@ -35,29 +35,6 @@ jobs:
 
     - stage: "Tests"
       name: "Tests"
-      script:
-        - npm run lint:hbs
-        - npm run lint:js
-        - npm test
-
-    # we recommend new addons test the current and previous LTS
-    # as well as latest stable release (bonus points to beta/canary)
-    - stage: "Additional Tests"
-      env: EMBER_TRY_SCENARIO=ember-lts-3.4
-    - env: EMBER_TRY_SCENARIO=ember-lts-3.8
-    - env: EMBER_TRY_SCENARIO=ember-release
-    - env: EMBER_TRY_SCENARIO=ember-beta
-    - env: EMBER_TRY_SCENARIO=ember-canary
-    - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
-    - env: EMBER_TRY_SCENARIO=aframe-0.5
-    - env: EMBER_TRY_SCENARIO=aframe-0.6
-    - env: EMBER_TRY_SCENARIO=aframe-0.7
-    - env: EMBER_TRY_SCENARIO=aframe-0.8
-
-    - name: "Node Tests"
-      script: npm run nodetest
-
-    - name: "FalTest"
       services: xvfb
       env: WEBDRIVER_BROWSER=firefox
       script: percy exec -- npm run faltest
