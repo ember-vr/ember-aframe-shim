@@ -14,7 +14,8 @@ describe('smoke', function() {
   before(async function() {
     if (ci.isCI) {
       let status = await getStatus({
-        context: `netlify/${name}/deploy-preview`
+        context: `netlify/${name}/deploy-preview`,
+        token: process.env.POLL_PR_STATUS_TOKEN
       });
 
       this.url = status ? status.target_url : `https://${name}.netlify.com`;
