@@ -13,6 +13,15 @@
           ]
         }
       ]
+    },
+    {
+      "name": "ember-extra-blueprint",
+      "version": "0.0.8",
+      "blueprints": [
+        {
+          "name": "ember-extra-blueprint"
+        }
+      ]
     }
   ]
 }
