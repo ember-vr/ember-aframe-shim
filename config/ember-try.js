@@ -99,6 +99,14 @@ module.exports = async function() {
             'aframe': '0.8'
           }
         }
+      },
+      {
+        name: 'aframe-0.9',
+        npm: {
+          devDependencies: {
+            'aframe': '0.9'
+          }
+        }
       }
     ]
   };
