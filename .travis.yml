@@ -53,6 +53,7 @@ jobs:
     - env: EMBER_TRY_SCENARIO=aframe-0.6
     - env: EMBER_TRY_SCENARIO=aframe-0.7
     - env: EMBER_TRY_SCENARIO=aframe-0.8
+    - env: EMBER_TRY_SCENARIO=aframe-0.9
 
     - name: "Node Tests"
       script: npm run nodetest
