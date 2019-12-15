@@ -23,6 +23,7 @@
 /ember-cli-build.js
 /faltest/
 /node-tests/
+/renovate.json
 /testem.js
 /tests/
 /yarn.lock
