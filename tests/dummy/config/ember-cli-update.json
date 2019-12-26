@@ -22,6 +22,15 @@
           "name": "ember-extra-blueprint"
         }
       ]
+    },
+    {
+      "name": "ember-cli-blueprint-test-helpers",
+      "version": "0.15.0",
+      "blueprints": [
+        {
+          "name": "ember-cli-blueprint-test-helpers"
+        }
+      ]
     }
   ]
 }
