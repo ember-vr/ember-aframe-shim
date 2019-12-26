@@ -59,6 +59,7 @@ module.exports = {
       })
     },
 
+    // mocha files
     {
       files: [
         'faltest/**/*-test.js',
