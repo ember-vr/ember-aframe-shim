@@ -69,6 +69,7 @@ module.exports = {
       }
     },
 
+    // vendor files
     {
       files: ['vendor/**/*.js'],
       parserOptions: {
