@@ -30,6 +30,7 @@
   "devDependencies": {
     "@ember/optional-features": "^1.0.0",
     "@faltest/lifecycle": "^2.0.0",
+    "@kellyselden/ember-blueprint": "1.1.0",
     "@percy/webdriverio": "^1.0.4",
     "aframe": "^1.0.0",
     "aframe-event-set-component": "^5.0.0",
