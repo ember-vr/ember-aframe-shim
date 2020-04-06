@@ -77,8 +77,10 @@ module.exports = async function() {
             'template-only-glimmer-components': false
           })
         },
-        ember: {
-          edition: 'classic'
+        npm: {
+          ember: {
+            edition: 'classic'
+          }
         }
       },
       {
