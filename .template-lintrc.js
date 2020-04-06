@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  extends: 'recommended',
+  extends: 'octane',
   rules: {
-    'img-alt-attributes': false
+    'require-valid-alt-text': false
   }
 };
