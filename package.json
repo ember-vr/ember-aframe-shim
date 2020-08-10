@@ -42,7 +42,7 @@
     "aframe-proxy-event-component": "^2.1.0",
     "babel-eslint": "^10.1.0",
     "ci-info": "^2.0.0",
-    "ember-cli": "3.17.0",
+    "ember-cli": "3.20.0",
     "ember-cli-babel": "^7.18.0",
     "ember-cli-blueprint-test-helpers": "0.19.2",
     "ember-cli-dependency-checker": "^3.2.0",
