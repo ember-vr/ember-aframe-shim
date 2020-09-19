@@ -6,7 +6,7 @@ node_js:
   - "10"
 
 addons:
-  firefox: latest
+  chrome: stable
 
 cache:
   directories:
@@ -29,41 +29,10 @@ jobs:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
   include:
-    # runs linting and tests with current locked deps
-    - stage: "Tests"
-      name: "Tests"
-      script:
-        - npm run lint
-        - npm run test:ember
-
     - stage: "Additional Tests"
-      name: "Floating Dependencies"
-      install:
-        - npm install --no-package-lock
-      script:
-        - npm run test:ember
-
-    # we recommend new addons test the current and previous LTS
-    # as well as latest stable release (bonus points to beta/canary)
-    - env: EMBER_TRY_SCENARIO=ember-lts-3.12
-    - env: EMBER_TRY_SCENARIO=ember-lts-3.16
-    - env: EMBER_TRY_SCENARIO=ember-release
-    - env: EMBER_TRY_SCENARIO=ember-beta
-    - env: EMBER_TRY_SCENARIO=ember-canary
-    - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
-    - env: EMBER_TRY_SCENARIO=ember-classic
-    - env: EMBER_TRY_SCENARIO=aframe-0.5
-    - env: EMBER_TRY_SCENARIO=aframe-0.6
-    - env: EMBER_TRY_SCENARIO=aframe-0.7
-    - env: EMBER_TRY_SCENARIO=aframe-0.8
-    - env: EMBER_TRY_SCENARIO=aframe-0.9
-
-    - name: "Node Tests"
-      script: npm run nodetest
-
-    - name: "FalTest"
+      name: "FalTest"
       services: xvfb
-      env: WEBDRIVER_BROWSER=firefox
+      env: DEBUG=@faltest/*
       script: percy exec -- npm run faltest
 
     - if: branch = master AND type = pull_request
