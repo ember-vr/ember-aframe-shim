@@ -12,7 +12,7 @@ describe('smoke', function() {
   setUpWebDriver.call(this);
 
   before(async function() {
-    if (ci.isCI) {
+    if (ci.isCI && process.env.NETLIFY !== 'false') {
       let status = await getStatus({
         context: `netlify/${name}/deploy-preview`,
         token: process.env.POLL_PR_STATUS_TOKEN
@@ -39,6 +39,8 @@ describe('smoke', function() {
   });
 
   it('works', async function() {
+    await this.browser.waitForInsert('#image-360');
+
     let src = await this.browser.executeAsync(done => {
       // eslint-disable-next-line no-undef
       let image360 = document.getElementById('image-360');

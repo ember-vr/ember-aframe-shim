@@ -63,7 +63,10 @@ jobs:
 
     - name: "FalTest"
       services: xvfb
-      env: WEBDRIVER_BROWSER=firefox
+      env:
+      - WEBDRIVER_BROWSER=firefox
+      # disable netlify polling for now
+      - NETLIFY=false
       script: percy exec -- npm run faltest
 
     - if: branch = master AND type = pull_request
