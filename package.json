@@ -34,7 +34,7 @@
     "@faltest/lifecycle": "^4.0.0",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.1",
-    "@kellyselden/ember-blueprint": "1.2.0",
+    "@kellyselden/ember-blueprint": "2.0.0",
     "@percy/webdriverio": "^1.0.4",
     "aframe": "^1.0.0",
     "aframe-event-set-component": "^5.0.0",
