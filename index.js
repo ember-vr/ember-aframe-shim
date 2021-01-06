@@ -4,6 +4,7 @@ const packageName = 'aframe';
 
 module.exports = {
   name: require('./package').name,
+<<<<<<< HEAD
 
   included() {
     this._super.included.apply(this, arguments);
@@ -24,4 +25,6 @@ module.exports = {
     this.import(`vendor/shims/${packageName}.js`);
     this.import(`vendor/shims/three.js`);
   }
+=======
+>>>>>>> 3089cd2... v3.21.2...v3.24.0
 };

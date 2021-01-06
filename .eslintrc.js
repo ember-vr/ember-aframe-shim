@@ -9,18 +9,17 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      legacyDecorators: true
-    }
+      legacyDecorators: true,
+    },
   },
-  plugins: [
-    'ember'
-  ],
+  plugins: ['ember'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
   ],
   env: {
-    browser: true
+    browser: true,
   },
   rules: {},
   overrides: [
@@ -28,30 +27,36 @@ module.exports = {
     {
       files: [
         '.eslintrc.js',
+        '.prettierrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
         'index.js',
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',
+<<<<<<< HEAD
         'faltest/**/*.js',
         'node-tests/**/*.js',
         'tests/dummy/config/**/*.js'
+=======
+        'tests/dummy/config/**/*.js',
+>>>>>>> 3089cd2... v3.21.2...v3.24.0
       ],
       excludedFiles: [
         'addon/**',
         'addon-test-support/**',
         'app/**',
-        'tests/dummy/app/**'
+        'tests/dummy/app/**',
       ],
       parserOptions: {
-        sourceType: 'script'
+        sourceType: 'script',
       },
       env: {
         browser: false,
-        node: true
+        node: true,
       },
       plugins: ['node'],
+<<<<<<< HEAD
       extends: ['plugin:node/recommended']
     },
 
@@ -89,4 +94,9 @@ module.exports = {
       }, {})
     }
   ]
+=======
+      extends: ['plugin:node/recommended'],
+    },
+  ],
+>>>>>>> 3089cd2... v3.21.2...v3.24.0
 };
