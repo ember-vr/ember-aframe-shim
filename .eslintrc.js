@@ -9,18 +9,17 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
-      legacyDecorators: true
-    }
+      legacyDecorators: true,
+    },
   },
-  plugins: [
-    'ember'
-  ],
+  plugins: ['ember'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
   ],
   env: {
-    browser: true
+    browser: true,
   },
   rules: {},
   overrides: [
@@ -28,6 +27,7 @@ module.exports = {
     {
       files: [
         '.eslintrc.js',
+        '.prettierrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
         'index.js',
@@ -36,34 +36,31 @@ module.exports = {
         'config/**/*.js',
         'faltest/**/*.js',
         'node-tests/**/*.js',
-        'tests/dummy/config/**/*.js'
+        'tests/dummy/config/**/*.js',
       ],
       excludedFiles: [
         'addon/**',
         'addon-test-support/**',
         'app/**',
-        'tests/dummy/app/**'
+        'tests/dummy/app/**',
       ],
       parserOptions: {
-        sourceType: 'script'
+        sourceType: 'script',
       },
       env: {
         browser: false,
-        node: true
+        node: true,
       },
       plugins: ['node'],
-      extends: ['plugin:node/recommended']
+      extends: ['plugin:node/recommended'],
     },
 
     // mocha files
     {
-      files: [
-        'faltest/**/*-test.js',
-        'node-tests/**/*-test.js'
-      ],
+      files: ['faltest/**/*-test.js', 'node-tests/**/*-test.js'],
       env: {
-        mocha: true
-      }
+        mocha: true,
+      },
     },
 
     // vendor files
@@ -71,22 +68,28 @@ module.exports = {
       files: ['vendor/**/*.js'],
       parserOptions: {
         ecmaVersion: 5,
-        sourceType: 'script'
+        sourceType: 'script',
       },
       env: {
-        amd: true
+        amd: true,
       },
       globals: {
-        Ember: 'readonly'
+        Ember: 'readonly',
       },
-      rules: Object.keys(Object.assign({},
-        // eslint-disable-next-line node/no-extraneous-require
-        require(path.resolve(path.dirname(require.resolve('eslint')), '../conf/eslint-recommended')).rules,
-        require('eslint-plugin-ember').configs.recommended.rules
-      )).reduce((rules, rule) => {
+      rules: Object.keys(
+        Object.assign(
+          {},
+          // eslint-disable-next-line node/no-extraneous-require
+          require(path.resolve(
+            path.dirname(require.resolve('eslint')),
+            '../conf/eslint-recommended'
+          )).rules,
+          require('eslint-plugin-ember').configs.recommended.rules
+        )
+      ).reduce((rules, rule) => {
         rules[rule] = 'off';
         return rules;
-      }, {})
-    }
-  ]
+      }, {}),
+    },
+  ],
 };

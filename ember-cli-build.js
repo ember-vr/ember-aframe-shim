@@ -2,7 +2,7 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
     // Add options here
   });
@@ -14,9 +14,15 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  app.import('node_modules/aframe-event-set-component/dist/aframe-event-set-component.js');
-  app.import('node_modules/aframe-layout-component/dist/aframe-layout-component.js');
-  app.import('node_modules/aframe-proxy-event-component/dist/aframe-proxy-event-component.js');
+  app.import(
+    'node_modules/aframe-event-set-component/dist/aframe-event-set-component.js'
+  );
+  app.import(
+    'node_modules/aframe-layout-component/dist/aframe-layout-component.js'
+  );
+  app.import(
+    'node_modules/aframe-proxy-event-component/dist/aframe-proxy-event-component.js'
+  );
 
   return app.toTree();
 };

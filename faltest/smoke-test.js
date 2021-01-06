@@ -8,14 +8,14 @@ const Server = require('ember-cli-test-server');
 const ci = require('ci-info');
 const { getStatus } = require('poll-pr-status');
 
-describe('smoke', function() {
+describe('smoke', function () {
   setUpWebDriver.call(this);
 
-  before(async function() {
+  before(async function () {
     if (ci.isCI && process.env.NETLIFY !== 'false') {
       let status = await getStatus({
         context: `netlify/${name}/deploy-preview`,
-        token: process.env.POLL_PR_STATUS_TOKEN
+        token: process.env.POLL_PR_STATUS_TOKEN,
       });
 
       this.url = status ? status.target_url : `https://${name}.netlify.com`;
@@ -28,25 +28,28 @@ describe('smoke', function() {
     }
   });
 
-  beforeEach(async function() {
+  beforeEach(async function () {
     await this.browser.url(this.url);
   });
 
-  after(async function() {
+  after(async function () {
     if (this.server) {
       await this.server.stop();
     }
   });
 
-  it('works', async function() {
+  it('works', async function () {
     await this.browser.waitForInsert('#image-360');
 
-    let src = await this.browser.executeAsync(done => {
+    let src = await this.browser.executeAsync((done) => {
       // eslint-disable-next-line no-undef
       let image360 = document.getElementById('image-360');
 
       function fadeComplete() {
-        image360.removeEventListener('animationcomplete__fadeback', fadeComplete);
+        image360.removeEventListener(
+          'animationcomplete__fadeback',
+          fadeComplete
+        );
 
         let src = image360.getAttribute('material').src.id;
 
@@ -64,7 +67,9 @@ describe('smoke', function() {
     await this.browser.execute(() => {
       function canvasToImage(canvas) {
         let scene = canvas.parentElement;
-        let canvasData = scene.components.screenshot.getCanvas('perspective').toDataURL();
+        let canvasData = scene.components.screenshot
+          .getCanvas('perspective')
+          .toDataURL();
 
         // eslint-disable-next-line no-undef
         let image = document.createElement('img');

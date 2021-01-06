@@ -6,7 +6,7 @@ const readFile = promisify(fs.readFile);
 const {
   setupTestHooks,
   emberNew,
-  emberGenerate
+  emberGenerate,
 } = require('ember-cli-blueprint-test-helpers/helpers');
 const { expect } = require('ember-cli-blueprint-test-helpers/chai');
 
@@ -15,13 +15,13 @@ async function getDevDependencies() {
   return Object.keys(packageJSON.devDependencies);
 }
 
-describe('Acceptance: ember generate and destroy ember-aframe-shim', function() {
+describe('Acceptance: ember generate and destroy ember-aframe-shim', function () {
   setupTestHooks(this, {
     disabledTasks: [],
-    timeout: 300000
+    timeout: 300000,
   });
 
-  it('ember-aframe-shim', async function() {
+  it('ember-aframe-shim', async function () {
     await emberNew();
 
     expect(await getDevDependencies()).to.not.contain('aframe');
