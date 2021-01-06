@@ -23,5 +23,5 @@ module.exports = {
     });
     this.import(`vendor/shims/${packageName}.js`);
     this.import(`vendor/shims/three.js`);
-  }
+  },
 };
