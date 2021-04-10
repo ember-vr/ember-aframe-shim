@@ -2,7 +2,7 @@
 
 const { setUpWebDriver } = require('@faltest/lifecycle');
 const assert = require('assert');
-const { percySnapshot } = require('@percy/webdriverio');
+const percySnapshot = require('@percy/webdriverio');
 const { name } = require('../package');
 const Server = require('ember-cli-test-server');
 const ci = require('ci-info');
