@@ -39,7 +39,7 @@
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
     "@kellyselden/ember-blueprint": "2.0.0",
-    "@percy/cli": "1.0.0-beta.31",
+    "@percy/cli": "1.28.2",
     "@percy/webdriverio": "^2.0.0",
     "aframe": "1.2.0",
     "aframe-event-set-component": "5.0.0",
