@@ -45,7 +45,7 @@
     "aframe-event-set-component": "5.0.0",
     "aframe-layout-component": "5.3.0",
     "aframe-proxy-event-component": "2.1.0",
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.11.0",
     "ci-info": "^3.0.0",
     "ember-cli": "3.25.3",
     "ember-cli-babel": "^7.23.1",
